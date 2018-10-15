@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/biryani_extralight</item>
+        <item>@font/bubbler_one</item>
+        <item>@font/calligraffitti</item>
+        <item>@font/delius_unicase</item>
+        <item>@font/zeyada</item>
+    </array>
+</resources>

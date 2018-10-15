@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Goodwill Hunting</string>
+    <string name="et_gwh">Goodwill \nHunting</string>
+    <string name="et_email">Email</string>
+    <string name="et_password">Password</string>
+
+    <string name="tv_welcome">Welcome to \n Goodwill Hunting!</string>
+
+    <string name="button_cancel">Cancel</string>
+    <string name="button_logout">Logout</string>
+    <string name="button_login">Log in</string>
+    <string name="button_signup">Sign Up</string>
+    <string name="button_submit">submit</string>
+    <string name="title_activity_welcome_screen">WelcomeScreenActivity</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+    <string name="title_activity_log_out">LogOutActivity</string>
+    <string name="checkbox_show">Show Password</string>
+</resources>

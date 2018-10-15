@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "371673692728",
+    "firebase_url": "https://goodwillhunting-65474.firebaseio.com",
+    "project_id": "goodwillhunting-65474",
+    "storage_bucket": "goodwillhunting-65474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371673692728:android:3d3955eed900f8aa",
+        "android_client_info": {
+          "package_name": "com.cs2340.goodwillhunting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371673692728-d0gj0utavc8c7tq7bcpciadtuju8m18u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs2340.goodwillhunting",
+            "certificate_hash": "a990668251ef64c3d1d0a2064250e293dcd7ccf0"
+          }
+        },
+        {
+          "client_id": "371673692728-bt84gja40f9q3c2tptpndkdi9lva5ufk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwmUr2Vg4ZJhgTJ2KFQtT0_9K_cH14SMo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371673692728-bt84gja40f9q3c2tptpndkdi9lva5ufk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
