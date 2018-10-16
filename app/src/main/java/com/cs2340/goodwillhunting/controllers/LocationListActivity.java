@@ -5,6 +5,7 @@ import com.cs2340.goodwillhunting.model.Location;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,8 +20,11 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.cs2340.goodwillhunting.model.Model;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 // Shows all the locations
@@ -66,6 +70,19 @@ public class LocationListActivity extends Activity {
         //Log.d(TAG, LoggedInUser.getInstance().getUserType().toString());
         //Toast.makeText(LocationListActivity.this, "This user is a "
         //        + LoggedInUser.getInstance().getUserType().toString(), Toast.LENGTH_LONG).show();
+
+        DatabaseReference userRef = reference.child("user");
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String userType = dataSnapshot.getValue(String.class);
+                Toast.makeText(LocationListActivity.this, userType, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        userRef.addListenerForSingleValueEvent(valueEventListener);
 
 
         logOut.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +158,6 @@ public class LocationListActivity extends Activity {
             holder.mKeyView.setText("" + mLocations.get(position).getKey());
             holder.mContentView.setText(mLocations.get(position).getName());
 
-            Log.d(TAG, "HAVE NOT CLICKED YET");
 
             /*
              * set up a listener to handle if the user clicks on this list item, what should happen?
@@ -149,7 +165,6 @@ public class LocationListActivity extends Activity {
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "CLICKED");
                     //on a phone, we need to change windows to the detail view
                     Context context = v.getContext();
                     //create our new intent with the new screen (activity)
