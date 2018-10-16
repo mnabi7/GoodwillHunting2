@@ -40,14 +40,15 @@ public class LocationListActivity extends Activity {
         reference = FirebaseDatabase.getInstance().getReference();
 
         InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
+
         CSVFile csvFile = new CSVFile(inputStream);
         List locs = csvFile.read();
 
         for (int i = 1; i < locs.size(); i++) {
             String[] row = (String[]) locs.get(i);
-            Location loc = new Location(row[0], row[1], row[2], row[3], row[4], row[5], row[6],
+            Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
                     row[7], row[8], row[9], row[10]);
-            reference.child("locations").child(loc.getKey()).setValue(loc);
+            reference.child("locations").child(Integer.toString(loc.getKey())).setValue(loc);
             Model.getInstance().addLocation(loc);
         }
 

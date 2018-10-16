@@ -41,14 +41,16 @@ public class LocationDetailFragment extends Fragment {
             Model model = Model.getInstance();
             // mCourse = model.getCourseById(getArguments().getInt(ARG_COURSE_ID));
             mLocation = model.getCurrLocation();
-            //Log.d("CourseDetailFragment", "Passing over location: " + mLocation);
+            Log.d("CourseDetailFragment", "Passing over location: " + mLocation.getName());
 
             Activity activity = this.getActivity();
 
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mLocation.toString());
+                appBarLayout.setTitle(mLocation.getName());
             }
+            Log.d("CourseDetailFragment", mLocation.toString());
+
         }
     }
 
@@ -59,11 +61,13 @@ public class LocationDetailFragment extends Fragment {
 
         //Step 1.  Setup the text view by getting it from our layout in the main window
         textView = rootView.findViewById(R.id.details);
+        showText(mLocation.toString());
 
         return rootView;
     }
 
     public void showText(String text) {
+        Log.d("Show Text", text);
         textView.setText(text);
     }
 
