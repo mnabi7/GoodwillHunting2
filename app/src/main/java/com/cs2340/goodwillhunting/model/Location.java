@@ -64,4 +64,8 @@ public class Location {
 
     public String getWebsite() { return website; }
     public void setWebsite(String website) { this.website = website; }
+
+    public String toString() {
+        return name + "\n" + address + "\n" + city + ", " + state + " " + zip + "\n" + phone + "\n" + website;
+    }
 }
