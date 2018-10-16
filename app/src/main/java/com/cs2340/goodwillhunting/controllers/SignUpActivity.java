@@ -20,13 +20,15 @@ import android.util.Log;
 
 import android.content.Intent;
 
-import com.cs2340.goodwillhunting.model.User;
+import com.cs2340.goodwillhunting.model.*;
 import com.cs2340.goodwillhunting.model.UserType;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 
@@ -54,6 +56,7 @@ public class SignUpActivity extends Activity {
 
     // Firebase
     private FirebaseAuth mAuth;
+    private DatabaseReference reference;
 
 
     @Override
@@ -79,6 +82,7 @@ public class SignUpActivity extends Activity {
 
         // Firebase
         mAuth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference();
 
         /*
             Set up the adapter to show the allowable user types
@@ -140,6 +144,8 @@ public class SignUpActivity extends Activity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpActivity.this, "Welcome!", Toast.LENGTH_LONG).show();
                             Log.d(TAG, userType.getSelectedItem().toString());
+                            createAccountReference(emailField.getText().toString(), passwordField.getText().toString(),
+                                    userType.getSelectedItem().toString());
                             LoggedInUser.getInstance().setUserType(UserType.valueOf(userType.getSelectedItem().toString().toUpperCase()));
                             LoggedInUser.getInstance().init(emailField.getText().toString(), passwordField.getText().toString(),
                                                                 "DUMMY");
@@ -157,6 +163,21 @@ public class SignUpActivity extends Activity {
                         }
                     }
                 });
+    }
+
+    private void createAccountReference(String email, String password, String userType) {
+
+        User user;
+        if (userType.equals("CONSUMER")) {
+            user = new Consumer(email, password);
+        } else if (userType.equals("EMPLOYEE")) {
+            user = new LocationEmployee(email, password);
+        } else if (userType.equals("MANAGER")) {
+            user = new Manager(email, password);
+        } else {
+            user = new Admin(email, password);
+        }
+        reference.child("users").child(Integer.toString(user.getId())).setValue(user);
     }
 
 

@@ -74,7 +74,7 @@ public class LogInActivity extends Activity {
                             Toast.makeText(LogInActivity.this, "Sign in successful!", Toast.LENGTH_LONG).show();
 
                             // UPDATE UI
-                            Intent intent = new Intent(LogInActivity.this, MainMenuActivity.class);
+                            Intent intent = new Intent(LogInActivity.this, LocationListActivity.class);
                             startActivity(intent);
 
                         } else {

@@ -21,13 +21,13 @@
         <activity android:name=".controllers.LogInActivity">
         </activity>
 
-        <activity android:name=".controllers.LogOutActivity">
-        </activity>
-
         <activity android:name=".controllers.SignUpActivity">
         </activity>
 
-        <activity android:name=".controllers.MainMenuActivity">
+        <activity android:name=".controllers.LocationListActivity">
+        </activity>
+
+        <activity android:name =".controllers.LocationDetailActivity">
         </activity>
 
         <meta-data

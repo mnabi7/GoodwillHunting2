@@ -2,7 +2,7 @@ package com.cs2340.goodwillhunting.model;
 
 public class Location {
 
-    private String key;
+    private int key;
     private String name;
     private String longitude;
     private String latitude;
@@ -14,7 +14,7 @@ public class Location {
     private String phone;
     private String website;
 
-    public Location(String key, String name, String longitude, String latitude, String address,
+    public Location(int key, String name, String longitude, String latitude, String address,
                         String city, String state, String zip, String type, String phone, String website) {
         this.key = key;
         this.name = name;
@@ -32,8 +32,8 @@ public class Location {
     /*
      * GETTERS AND SETTERS
      */
-    public String getKey() { return key; }
-    public void setKey(String key) { this.key = key; }
+    public int getKey() { return key; }
+    public void setKey(int key) { this.key = key; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -64,4 +64,8 @@ public class Location {
 
     public String getWebsite() { return website; }
     public void setWebsite(String website) { this.website = website; }
+
+    public String toString() {
+        return name + "\n" + address + "\n" + city + ", " + state + " " + zip + "\n" + phone + "\n" + website;
+    }
 }
