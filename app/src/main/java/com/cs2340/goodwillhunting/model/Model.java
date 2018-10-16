@@ -55,6 +55,8 @@ public class Model {
         return true;
     }
 
+    public void clear(){ _locations.clear(); }
+
     public Location getCurrLocation() { return currLocation; }
     public void setCurrLocation(Location loc) { currLocation = loc; }
 

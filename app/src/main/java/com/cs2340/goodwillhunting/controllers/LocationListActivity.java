@@ -43,7 +43,7 @@ public class LocationListActivity extends Activity {
 
         CSVFile csvFile = new CSVFile(inputStream);
         List locs = csvFile.read();
-
+        Model.getInstance().clear();
         for (int i = 1; i < locs.size(); i++) {
             String[] row = (String[]) locs.get(i);
             Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
