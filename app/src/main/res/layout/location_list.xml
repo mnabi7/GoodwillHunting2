@@ -7,6 +7,5 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
     tools:context="com.cs2340.goodwillhunting.controllers.LocationListActivity"
     tools:listitem="@layout/location_list_content" />

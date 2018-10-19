@@ -18,7 +18,7 @@ import java.util.List;
 import com.cs2340.goodwillhunting.R;
 import com.cs2340.goodwillhunting.model.Location;
 import com.cs2340.goodwillhunting.model.Model;
-import com.cs2340.goodwillhunting.controllers.LocationListActivity.SimpleLocationRecyclerViewAdapter;
+//import com.cs2340.goodwillhunting.controllers.LocationListActivity.SimpleLocationRecyclerViewAdapter;
 
 public class LocationDetailFragment extends Fragment {
 

@@ -19,15 +19,24 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <!--<FrameLayout-->
+        <!--android:id="@+id/frameLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+        <!--<include layout="@layout/location_list" />-->
+    <!--</FrameLayout>-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/location_list" />
-    </FrameLayout>
-
+        android:layout_height="557dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <Button
         android:id="@+id/button_logout"
         android:layout_width="78dp"
