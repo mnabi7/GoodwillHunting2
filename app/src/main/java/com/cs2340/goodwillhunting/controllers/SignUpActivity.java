@@ -39,7 +39,6 @@ public class SignUpActivity extends Activity {
     private static final String TAG = "SignUp";
 
     // View
-    private EditText logInIDField;
     private EditText emailField;
     private EditText passwordField;
     private EditText confirmField;
@@ -65,7 +64,6 @@ public class SignUpActivity extends Activity {
         setContentView(R.layout.activity_sign_up);
 
         // View
-        //logInIDField = findViewById(R.id.et_login);
         emailField = findViewById(R.id.et_email);
         passwordField = findViewById(R.id.et_password);
         confirmField = findViewById(R.id.et_rep_pass);
@@ -144,8 +142,11 @@ public class SignUpActivity extends Activity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(SignUpActivity.this, "Welcome!", Toast.LENGTH_LONG).show();
                             Log.d(TAG, userType.getSelectedItem().toString());
-                            createAccountReference(emailField.getText().toString(), passwordField.getText().toString(),
+                            User locUser = createAccountReference(emailField.getText().toString(), passwordField.getText().toString(),
                                     userType.getSelectedItem().toString());
+                            //Log.d("CREATED ACCOUNT REF", "" + locUser.getId());
+                            reference.child("users").child(user.getUid()).setValue(locUser);
+
                             LoggedInUser.getInstance().setUserType(UserType.valueOf(userType.getSelectedItem().toString().toUpperCase()));
                             LoggedInUser.getInstance().init(emailField.getText().toString(), passwordField.getText().toString(),
                                                                 "DUMMY");
@@ -165,19 +166,19 @@ public class SignUpActivity extends Activity {
                 });
     }
 
-    private void createAccountReference(String email, String password, String userType) {
+    private User createAccountReference(String email, String password, String userType) {
 
         User user;
-        if (userType.equals("CONSUMER")) {
+        if (userType.equals("Consumer")) {
             user = new Consumer(email, password);
-        } else if (userType.equals("EMPLOYEE")) {
+        } else if (userType.equals("Employee")) {
             user = new LocationEmployee(email, password);
-        } else if (userType.equals("MANAGER")) {
+        } else if (userType.equals("Manager")) {
             user = new Manager(email, password);
         } else {
             user = new Admin(email, password);
         }
-        reference.child("users").child(Integer.toString(user.getId())).setValue(user);
+        return user;
     }
 
 
