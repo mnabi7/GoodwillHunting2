@@ -2,16 +2,23 @@ package com.cs2340.goodwillhunting.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class User implements Parcelable {
     /** allow us to assign unique id numbers to each user */
-    private static int Next_Id = 0;
+    //private static int Next_Id = 0;
 
     /** this user id number */
-    private int _id;
+    //private int _id;
 
     /** this user email */
     private String _email;
@@ -21,6 +28,8 @@ public class User implements Parcelable {
 
     /** this user's type */
     private UserType _user_type;
+
+    private DatabaseReference reference;
 
 
     /**
@@ -41,7 +50,8 @@ public class User implements Parcelable {
         _email = email;
         _password = password;
         _user_type = type;
-        _id = User.Next_Id++;
+
+
     }
 
 
@@ -50,7 +60,7 @@ public class User implements Parcelable {
      */
 
     //no setter for this.  id is a read only field
-    public int getId() { return _id; }
+    //public int getId() { return _id; }
 
     /** Returns user email*/
     public String getEmail() { return _email; }
@@ -73,23 +83,19 @@ public class User implements Parcelable {
     private User(Parcel in) {
         _email = in.readString();
         _password = in.readString();
-        _id = in.readInt();
+        //_id = in.readInt();
     }
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /* *************************
-       If you add new instance vars to Student, you will need to add them to the write
-       Be sure the order you write information matches the order that the constructor above
-       reads them.
-     */
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_email);
         dest.writeString(_password);
-        dest.writeInt(_id);
+        //dest.writeInt(_id);
     }
     /**
      * Should not have to edit this method if the constructor and write method are
