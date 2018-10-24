@@ -1,7 +1,7 @@
 package com.cs2340.goodwillhunting.controllers;
 //
 //import com.cs2340.goodwillhunting.R;
-//import com.cs2340.goodwillhunting.model.Location;
+import com.cs2340.goodwillhunting.model.Item;
 //
 //import android.content.Intent;
 //import android.os.Bundle;
@@ -66,14 +66,21 @@ package com.cs2340.goodwillhunting.controllers;
 //
 //}
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cs2340.goodwillhunting.R;
 import com.cs2340.goodwillhunting.model.Location;
+import com.cs2340.goodwillhunting.model.ItemsAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +91,14 @@ import java.util.ArrayList;
 
 public class LocationDetailActivity extends AppCompatActivity {
     private static final String TAG = "LocationDetailActivity";
+    FloatingActionButton info;
+    FloatingActionButton addItem;
+    private DatabaseReference reference;
+    ArrayList<Location> list;
+    ArrayList<Item> itemList;
+    ItemsAdapter adapter;
+    String extraName="";
+    String extraKey="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,38 +106,80 @@ public class LocationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_detail);
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
+        info = (FloatingActionButton) findViewById(R.id.fab);
+
+
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PopActivity.class);
+                intent.putExtra("location_name", extraName);
+                startActivity(intent);
+            }
+        });
+
+        addItem = (FloatingActionButton) findViewById(R.id.addItem);
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
+                intent.putExtra("location_key",extraKey);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
-        if(getIntent().hasExtra("location_name")) {
+        if (getIntent().hasExtra("location_name")) {
 
             Log.d(TAG, "getIncomingIntent: found intent extras.");
             final String locName = getIntent().getStringExtra("location_name");
+            extraName = locName;
 
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("locations");
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     ArrayList<Location> list = new ArrayList<Location>();
-                    for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Location l = dataSnapshot1.getValue(Location.class);
                         if (l.getName().equals(locName)) {
                             list.add(l);
                         }
                     }
-                    final String locAddress = list.get(0).getAddress();
-                    final String locCity = list.get(0).getCity();
-                    final String locKey = Integer.toString(list.get(0).getKey());
-                    final String locLatitude = list.get(0).getLatitude();
-                    final String locLongitude = list.get(0).getLongitude();
-                    final String locPhone = list.get(0).getPhone();
-                    final String locState = list.get(0).getState();
-                    final String locType = list.get(0).getType();
-                    final String locWebsite = list.get(0).getWebsite();
-                    final String locZip = list.get(0).getZip();
+                    extraKey = "" + list.get(0).getKey();
 
-                    setStoreName(locName, locAddress, locCity, locKey, locLatitude, locLongitude, locPhone,locState,locType,locWebsite,locZip);
+                    setStoreName(locName);
+
+
+                    final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.item_List);
+                    DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("items");
+
+                    //should be holding the location items # container of items
+                    reference2 = reference2.child(extraKey);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(LocationDetailActivity.this));
+                    reference2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d(TAG, "reached items for location #");
+                            ArrayList<Item> itemList = new ArrayList<Item>();
+                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                Item it = dataSnapshot1.getValue(Item.class);
+                                itemList.add(it);
+                            }
+                            adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
+                            recyclerView.setAdapter(adapter);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Toast.makeText(LocationDetailActivity.this, "Idk wtf i am doing, i just hope this works pt. 2", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                 }
 
                 @Override
@@ -133,34 +190,8 @@ public class LocationDetailActivity extends AppCompatActivity {
 
         }
     }
-    private void setStoreName(String storeName, String address, String city, String key, String latitude,String longitude,
-                              String phone, String state, String type, String  website, String zip) {
-        Log.d(TAG, "setName: setting the store name to widgets.");
+    private void setStoreName(String storeName) {
         TextView name = findViewById(R.id.store_Name);
-        TextView add = findViewById(R.id.store_address);
-        TextView c = findViewById(R.id.store_city);
-        TextView k = findViewById(R.id.store_key);
-        TextView l = findViewById(R.id.store_latitude);
-        TextView lon = findViewById(R.id.store_longitude);
-        TextView p = findViewById(R.id.store_phone);
-        TextView st = findViewById(R.id.store_state);
-        TextView t = findViewById(R.id.store_type);
-        TextView w = findViewById(R.id.store_website);
-        TextView z = findViewById(R.id.store_zip);
-
         name.setText(storeName);
-        add.setText(address);
-        c.setText(city);
-        k.setText(key);
-        l.setText(latitude);
-        lon.setText(longitude);
-        p.setText(phone);
-        st.setText(state);
-        t.setText(type);
-        w.setText(website);
-        z.setText(zip);
-
-
     }
-
 }

@@ -4,17 +4,17 @@
     android:layout_height="wrap_content"
     android:orientation= "vertical"
     android:layout_margin="20dp"
-    android:background="@drawable/background"
+    android:background="@drawable/rounded_corner"
+    android:backgroundTint="#d8b8c5"
     android:id="@+id/parent_layout">
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:textAppearance="@android:style/TextAppearance.Holo"
-        android:textColor="#d8b8c5"
+        android:textColor="#030303"
         android:textSize="17dp"
-        android:gravity="center"
-        android:textStyle="bold">
+        android:gravity="center">
     </TextView>
 
 </LinearLayout>
