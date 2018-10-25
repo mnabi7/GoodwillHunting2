@@ -29,15 +29,18 @@
 
         <activity android:name =".controllers.LocationDetailActivity">
         </activity>
+
         <activity android:name =".controllers.PopActivity"
             android:theme="@style/AppTheme.PopMe">
         </activity>
 
         <activity android:name=".controllers.AddItemActivity">
-
         </activity>
-        <activity android:name=".controllers.ItemDetailActivity">
 
+        <activity android:name=".controllers.ItemDetailActivity">
+        </activity>
+
+        <activity android:name=".controllers.SearchActivity">
         </activity>
 
 

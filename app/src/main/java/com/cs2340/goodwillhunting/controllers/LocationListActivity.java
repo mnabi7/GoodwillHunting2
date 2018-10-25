@@ -4,6 +4,7 @@ import com.cs2340.goodwillhunting.model.Location;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,6 +28,7 @@ public class LocationListActivity extends Activity {
 
     private static final String TAG = "MainMenu";
     private Button logOut;
+    private Button search;
     private DatabaseReference reference;
     private DatabaseReference reference2;
     RecyclerView recyclerView;
@@ -63,6 +65,7 @@ public class LocationListActivity extends Activity {
             }
         });
         logOut = findViewById(R.id.button_logout);
+        search = findViewById(R.id.button_search);
 
         reference = FirebaseDatabase.getInstance().getReference();
 
@@ -77,38 +80,12 @@ public class LocationListActivity extends Activity {
             reference.child("locations").child(Integer.toString(loc.getKey())).setValue(loc);
         }
 
-//        logOut = findViewById(R.id.button_logout);
-//
-//        reference = FirebaseDatabase.getInstance().getReference();
-//
-//        InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-//
-//        CSVFile csvFile = new CSVFile(inputStream);
-//        List locs = csvFile.read();
-//       // Model.getInstance().clear();
-//        for (int i = 1; i < locs.size(); i++) {
-//            String[] row = (String[]) locs.get(i);
-//            Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
-//                    row[7], row[8], row[9], row[10]);
-//            reference.child("locations").child(loc.getKey()).setValue(loc);
-//           // reference.child("locations").child(Integer.toString(loc.getKey())).setValue(loc);
-//          //  Model.getInstance().addLocation(loc);
-//        }
-//
-//        View recyclerView = findViewById(R.id.location_list);
-//        //assert recyclerView != null;
-//
-//        setupRecyclerView((RecyclerView) recyclerView);
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        //Log.d(TAG, LoggedInUser.getInstance().getUserType().toString());
-        //Toast.makeText(LocationListActivity.this, "This user is a "
-        //        + LoggedInUser.getInstance().getUserType().toString(), Toast.LENGTH_LONG).show();
 
         DatabaseReference userRef = reference.child("user");
         ValueEventListener valueEventListener = new ValueEventListener() {
@@ -128,6 +105,14 @@ public class LocationListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationListActivity.this, WelcomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LocationListActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });
