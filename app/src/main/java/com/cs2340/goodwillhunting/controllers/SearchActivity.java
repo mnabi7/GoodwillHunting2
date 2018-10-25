@@ -15,6 +15,7 @@ import android.view.View;
 import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+import android.widget.EditText;
 
 
 import com.google.firebase.database.DataSnapshot;
@@ -30,11 +31,13 @@ import java.util.ArrayList;
 public class SearchActivity extends Activity {
 
     private static final String TAG = "SearchActivity";
+
     private Spinner chooseLoc;
-    private RadioGroup radioGroup;
-    private RadioButton radioButton;
-    private RadioButton allLocations;
-    private RadioButton singleLocation;
+    private RadioGroup radioGroup1;
+
+    private RadioGroup radioGroup2;
+    private Spinner chooseCategory;
+    private EditText itemName;
     private Button submit;
     private DatabaseReference reference;
     ArrayList<String> locNames;
@@ -44,9 +47,9 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        allLocations = findViewById(R.id.radio_all_loc);
-        singleLocation = findViewById(R.id.radio_single_loc);
         chooseLoc = findViewById(R.id.loc_spinner);
+        chooseCategory = findViewById(R.id.cat_spinner);
+        itemName = findViewById(R.id.et_item_name);
         submit = findViewById(R.id.button_submit_search);
 
         reference = FirebaseDatabase.getInstance().getReference().child("locations");
@@ -73,6 +76,11 @@ public class SearchActivity extends Activity {
             }
         });
 
+        String catArr[] = new String[]{"Clothing", "Kitchen", "Electronics", "Household"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(SearchActivity.this, android.R.layout.simple_spinner_item, catArr);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        chooseCategory.setAdapter(adapter1);
+
 
     }
 
@@ -84,23 +92,30 @@ public class SearchActivity extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                radioGroup = (RadioGroup) findViewById(R.id.radio_group);
+                radioGroup1 = (RadioGroup) findViewById(R.id.radio_group1);
+                radioGroup2 = (RadioGroup) findViewById(R.id.radio_group2);
+                RadioButton loc_answer = ((RadioButton) findViewById(radioGroup1.getCheckedRadioButtonId()));
+                RadioButton item_answer = ((RadioButton) findViewById((radioGroup2.getCheckedRadioButtonId())));
+
+                if (loc_answer.getId() == R.id.radio_all_loc) {
+                    if (item_answer.getId() == R.id.radio_item_name) {
+                        Toast.makeText(SearchActivity.this, "All location and item name", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SearchActivity.this, "All locations and category", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    if (item_answer.getId() == R.id.radio_item_name) {
+                        Toast.makeText(SearchActivity.this, "Single location and item name", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(SearchActivity.this, "Single locations and category", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
+    // needed method for radio buttons, but doesn't do anything
+    public void onRadioButtonClicked(View view) {}
 
-        switch(view.getId()) {
-            case R.id.radio_all_loc:
-                Toast.makeText(SearchActivity.this, "ALL LOCATIONS", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.radio_single_loc:
-                Toast.makeText(SearchActivity.this, "SINGLE LOCATION", Toast.LENGTH_LONG).show();
-                break;
-
-        }
-    }
 }

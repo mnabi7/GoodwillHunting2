@@ -9,6 +9,47 @@
     tools:context=".controllers.SearchActivity">
 
 
+    <EditText
+        android:id="@+id/et_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="-35dp"
+        android:ems="10"
+        android:hint="Enter item name"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/cat_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="35dp" />
+
+    <RadioGroup
+        android:id="@+id/radio_group2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Item Name" />
+
+        <RadioButton
+            android:id="@+id/radio_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Category" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/button_submit_search"
         android:layout_width="wrap_content"
@@ -17,7 +58,7 @@
         android:text="SUBMIT SEARCH" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/radio_group"
+        android:id="@+id/radio_group1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
