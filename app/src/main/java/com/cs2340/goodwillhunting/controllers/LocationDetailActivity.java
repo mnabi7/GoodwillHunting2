@@ -124,6 +124,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 intent.putExtra("location_key",extraKey);
+                intent.putExtra("location_name", extraName);
                 startActivity(intent);
             }
         });
@@ -158,28 +159,80 @@ public class LocationDetailActivity extends AppCompatActivity {
                     DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("items");
 
                     //should be holding the location items # container of items
-                    reference2 = reference2.child(extraKey);
+                    reference2 = reference2.child("Location " + extraKey);
                     recyclerView.setLayoutManager(new LinearLayoutManager(LocationDetailActivity.this));
-                    reference2.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Log.d(TAG, "reached items for location #");
-                            ArrayList<Item> itemList = new ArrayList<Item>();
-                            for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                Item it = dataSnapshot1.getValue(Item.class);
-                                itemList.add(it);
+                    if (!getIntent().hasExtra("item_name") && !getIntent().hasExtra("category")) {
+                        reference2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.d(TAG, "reached items for location #");
+                                ArrayList<Item> itemList = new ArrayList<Item>();
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    Item it = dataSnapshot1.getValue(Item.class);
+                                    itemList.add(it);
+                                }
+
+                                adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
+                                recyclerView.setAdapter(adapter);
+
                             }
-                            adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
-                            recyclerView.setAdapter(adapter);
 
-                        }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Toast.makeText(LocationDetailActivity.this, "Idk wtf i am doing, i just hope this works pt. 2", Toast.LENGTH_SHORT).show();
 
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Toast.makeText(LocationDetailActivity.this, "Idk wtf i am doing, i just hope this works pt. 2", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else if (getIntent().hasExtra("item_name") && !getIntent().hasExtra("category")) {
+                        reference2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.d(TAG, "reached items for location #");
+                                ArrayList<Item> itemList = new ArrayList<Item>();
+                                String itemName = getIntent().getStringExtra("item_name");
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    Item it = dataSnapshot1.getValue(Item.class);
+                                    if (it.getName().equals(itemName)) {
+                                        itemList.add(it);
+                                    }
+                                }
 
-                        }
-                    });
+                                adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
+                                recyclerView.setAdapter(adapter);
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    } else if (getIntent().hasExtra("category")){
+                        reference2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                Log.d(TAG, "reached items for location #");
+                                ArrayList<Item> itemList = new ArrayList<Item>();
+                                String category = getIntent().getStringExtra("category");
+                                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                                    Item it = dataSnapshot1.getValue(Item.class);
+                                    if (it.getCategory().equals(category)) {
+                                        itemList.add(it);
+                                    }
+                                }
+
+                                adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
+                                recyclerView.setAdapter(adapter);
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
                 }
 
                 @Override
@@ -189,6 +242,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             });
 
         }
+
     }
     private void setStoreName(String storeName) {
         TextView name = findViewById(R.id.store_Name);

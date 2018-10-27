@@ -38,17 +38,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
-        myViewHolder.itemName.setText(items.get(i).getname());
+        myViewHolder.itemName.setText(items.get(i).getName());
         myViewHolder.itemDescription.setText(items.get(i).getDescription());
         myViewHolder.itemQty.setText(""+items.get(i).getQuantity());
        // myViewHolder.itemQty.setText(items.get(i).getQuantity());
         myViewHolder.item_parent_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, items.get(i).getname(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, items.get(i).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ItemDetailActivity.class);
-                intent.putExtra("item_name", items.get(i).getname());
-                intent.putExtra("item_key", Integer.toString(items.get(i).getKey()));
+                intent.putExtra("item_name", items.get(i).getName());
+                intent.putExtra("item_loc", Integer.toString(items.get(i).getLocation()));
                 context.startActivity(intent);
             }
         });

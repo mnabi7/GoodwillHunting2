@@ -4,35 +4,33 @@ public class Item {
 
     private String name;
     private String description;
-    private String idNumber;
+    private String category;
     private int quantity;
-    private int key;
+    private int locKey; //location associated with this item
+    private int itemKey;
+    private String locName;
+    private double value;
 
     public Item() {
 
     }
 
-    public Item(String name, String description, String idNumber, int quantity, int key) {
+    public Item(String name, String description, String category, int quantity, int locKey, double value, String locName, int itemKey) {
         this.name = name;
         this.description= description;
-        this.idNumber = idNumber;
         this.quantity = quantity;
-        this.key = key;
+        this.category = category;
+        this.locKey= locKey;
+        this.itemKey = itemKey;
+        this.value = value;
+        this.locName = locName;
     }
 
-    public int getKey() {
-        return key;
-    }
-
-    public void setKey(int key) {
-        this.key = key;
-    }
-
-    public String getname() {
+    public String getName() {
         return name;
     }
 
-    public void setname(String itemName) {
+    public void setName(String itemName) {
         this.name = itemName;
     }
 
@@ -44,26 +42,39 @@ public class Item {
         this.description = description;
     }
 
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
-
     public int getQuantity() { return quantity;}
 
     public void setQuantity(int quantity) { this.quantity = quantity; }
 
+    public int getLocation() { return locKey; }
+
+    public void setLocation(int locKey) { this.locKey = locKey; }
+
+    public double getValue() { return value; }
+
+    public void setValue(double value) { this.value = value; }
+
+    public String getCategory() { return category; } // only need a getter
+
+    public String getLocName() { return locName; }
+
+    public void setLocName(String locName) { this.locName = locName; }
+
+    public int getItemKey() { return itemKey; }
+
+    public void setItemKey(int key) { this.itemKey = key; }
+
+
+
     @Override
     public String toString() {
         return "Item {\n" +
-                "   name='" + name + '\'' +
-                "\n   description='" + description + '\'' +
-                "\n   idNumber='" + idNumber + '\'' +
-                "\n   quantity=" + quantity +
-                "\n   key=" + key +
+                "   name ='" + name + '\'' +
+                "\n   description ='" + description + '\'' +
+                "\n   value = $'" + value + '\'' +
+                "\n   quantity =" + quantity +
+                "\n   category =" + category +
+                "\n   location =" + locName +
                 "\n}";
     }
 }

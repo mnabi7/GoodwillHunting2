@@ -20,10 +20,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private static final String TAG = "MyAdapter";
     Context context;
     ArrayList<Location> locations;
+    String itemName;
+    String category;
 
-    public MyAdapter(Context c, ArrayList<Location> l) {
+    public MyAdapter(Context c, ArrayList<Location> l, String i, String cat) {
         context = c;
         locations = l;
+        itemName = i;
+        category = cat;
     }
 
     @NonNull
@@ -42,6 +46,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 Toast.makeText(context, locations.get(i).getName(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, LocationDetailActivity.class);
                 intent.putExtra("location_name", locations.get(i).getName());
+                if (itemName != null) {
+                    intent.putExtra("item_name", itemName);
+                }
+
+                if (category != null) {
+                    intent.putExtra("category", category);
+                }
                 context.startActivity(intent);
             }
         });

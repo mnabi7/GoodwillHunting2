@@ -16,12 +16,12 @@
     </android.support.design.widget.AppBarLayout>
 
     <!--<FrameLayout-->
-        <!--android:id="@+id/frameLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+    <!--android:id="@+id/frameLayout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
 
-        <!--<include layout="@layout/location_list" />-->
+    <!--<include layout="@layout/location_list" />-->
     <!--</FrameLayout>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecycler"
@@ -35,32 +35,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_logout"
+        android:id="@+id/button_back"
         android:layout_width="78dp"
         android:layout_height="25dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|center"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="#d8b8c5"
-        android:text="@string/button_logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_search"
-        android:layout_width="78dp"
-        android:layout_height="25dp"
-        android:layout_gravity="bottom|left"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/rounded_corner"
-        android:backgroundTint="#d8b8c5"
-        android:text="SEARCH"
+        android:text="BACK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

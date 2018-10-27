@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:fitsSystemWindows="true"
+    tools:context=".controllers.SearchActivity">
+
+
+    <EditText
+        android:id="@+id/et_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="-35dp"
+        android:ems="10"
+        android:hint="Enter item name"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/cat_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="35dp" />
+
+    <RadioGroup
+        android:id="@+id/radio_group2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Item Name" />
+
+        <RadioButton
+            android:id="@+id/radio_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Category" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button_submit_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="SUBMIT SEARCH" />
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_group1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-225dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radio_all_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="All Locations" />
+
+        <RadioButton
+            android:id="@+id/radio_single_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="Single Location" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/et_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:fontFamily="@font/biryani_extralight"
+        android:gravity="top"
+        android:text="Search by:"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:textColor="#d8b8c5"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <Spinner
+        android:id="@+id/loc_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_gravity="center_vertical|center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="-200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

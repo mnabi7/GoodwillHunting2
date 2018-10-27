@@ -58,23 +58,25 @@ public class ItemDetailActivity extends Activity {
 
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
-        if(getIntent().hasExtra("item_name")&&getIntent().hasExtra("item_key")) {
+        if(getIntent().hasExtra("item_name")&&getIntent().hasExtra("item_loc")) {
 
             Log.d(TAG, "getIncomingIntent: found intent extras.");
             final String itemName = getIntent().getStringExtra("item_name");
-            final String itemKey = getIntent().getStringExtra("item_key");
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items").child(itemKey);
+            final String itemLoc = getIntent().getStringExtra("item_loc");
+
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("items").child("Location " + itemLoc);
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     ArrayList<Item> list = new ArrayList<Item>();
                     for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
                         Item it = dataSnapshot1.getValue(Item.class);
-                        if (it.getname().equals(itemName)) {
+                        if (it.getName().equals(itemName)) {
                             list.add(it);
                         }
                     }
                     final String itemToString = list.get(0).toString();
+                    Log.d(TAG, "TO STRING: " + itemToString);
                     System.out.println(" alsd;kj  heeeeeyyyyyyyyyy           " + itemToString);
 
                     setDescription(itemToString, itemName);
