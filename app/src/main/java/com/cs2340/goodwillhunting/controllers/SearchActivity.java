@@ -97,53 +97,65 @@ public class SearchActivity extends Activity {
                 RadioButton loc_answer = ((RadioButton) findViewById(radioGroup1.getCheckedRadioButtonId()));
                 RadioButton item_answer = ((RadioButton) findViewById((radioGroup2.getCheckedRadioButtonId())));
 
-                if (loc_answer.getId() == R.id.radio_all_loc) {
-                    if (item_answer.getId() == R.id.radio_item_name) {
-                        if (itemName.getText().toString().isEmpty()) {
-                            Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(SearchActivity.this, "All location and item name", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
-                            Bundle extras = new Bundle();
-                            extras.putString("item_name", itemName.getText().toString());
-                            extras.putString("category", null);
-                            extras.putString("single_loc", null);
-                            intent.putExtras(extras);
-                            startActivity(intent);
-                        }
-                    } else {
-                        Toast.makeText(SearchActivity.this, "All locations and category", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
-                        Bundle extras = new Bundle();
-                        extras.putString("category", chooseCategory.getSelectedItem().toString());
-                        extras.putString("item_name", null);
-                        extras.putString("single_loc", null);
-                        intent.putExtras(extras);
-                        startActivity(intent);
-                    }
+                if (loc_answer == null) {
+                    Toast.makeText(SearchActivity.this, "Please select a first search option", Toast.LENGTH_LONG).show();
                 } else {
-                    if (item_answer.getId() == R.id.radio_item_name) {
-                        if (itemName.getText().toString().isEmpty()) {
-                            Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
+                    if (loc_answer.getId() == R.id.radio_all_loc) {
+                        if (item_answer == null) {
+                            Toast.makeText(SearchActivity.this, "Please select a second search option", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(SearchActivity.this, "Single location and item name", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
-                            Bundle extras = new Bundle();
-                            extras.putString("category", null);
-                            extras.putString("item_name", itemName.getText().toString());
-                            extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
-                            intent.putExtras(extras);
-                            startActivity(intent);
+                            if (item_answer.getId() == R.id.radio_item_name) {
+                                if (itemName.getText().toString().isEmpty()) {
+                                    Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
+                                } else {
+                                    //Toast.makeText(SearchActivity.this, "All location and item name", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putString("item_name", itemName.getText().toString());
+                                    extras.putString("category", null);
+                                    extras.putString("single_loc", null);
+                                    intent.putExtras(extras);
+                                    startActivity(intent);
+                                }
+                            } else if (item_answer.getId() == R.id.radio_categories) {
+                                //Toast.makeText(SearchActivity.this, "All locations and category", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                                Bundle extras = new Bundle();
+                                extras.putString("category", chooseCategory.getSelectedItem().toString());
+                                extras.putString("item_name", null);
+                                extras.putString("single_loc", null);
+                                intent.putExtras(extras);
+                                startActivity(intent);
+                            }
                         }
-                    } else {
-                        Toast.makeText(SearchActivity.this, "Single locations and category", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
-                        Bundle extras = new Bundle();
-                        extras.putString("category", chooseCategory.getSelectedItem().toString());
-                        extras.putString("item_name", null);
-                        extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
-                        intent.putExtras(extras);
-                        startActivity(intent);
+                    } else if (loc_answer.getId() == R.id.radio_single_loc) {
+                        if (item_answer == null) {
+                            Toast.makeText(SearchActivity.this, "Please select a second search option", Toast.LENGTH_LONG).show();
+                        } else {
+                            if (item_answer.getId() == R.id.radio_item_name) {
+                                if (itemName.getText().toString().isEmpty()) {
+                                    Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
+                                } else {
+                                    //Toast.makeText(SearchActivity.this, "Single location and item name", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                                    Bundle extras = new Bundle();
+                                    extras.putString("category", null);
+                                    extras.putString("item_name", itemName.getText().toString());
+                                    extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
+                                    intent.putExtras(extras);
+                                    startActivity(intent);
+                                }
+                            } else if (item_answer.getId() == R.id.radio_categories) {
+                                //Toast.makeText(SearchActivity.this, "Single locations and category", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                                Bundle extras = new Bundle();
+                                extras.putString("category", chooseCategory.getSelectedItem().toString());
+                                extras.putString("item_name", null);
+                                extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
+                                intent.putExtras(extras);
+                                startActivity(intent);
+                            }
+                        }
                     }
                 }
             }

@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_logout"
+        android:id="@+id/button_back"
         android:layout_width="78dp"
         android:layout_height="25dp"
         android:layout_gravity="bottom|center"
@@ -44,7 +44,7 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="#d8b8c5"
-        android:text="@string/button_logout"
+        android:text="BACK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

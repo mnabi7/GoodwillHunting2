@@ -1,5 +1,6 @@
 package com.cs2340.goodwillhunting.controllers;
 import com.cs2340.goodwillhunting.model.Item;
+import com.cs2340.goodwillhunting.model.ItemsAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,12 +29,14 @@ import java.util.HashMap;
 public class SearchLocationResultActivity extends Activity {
 
     private static final String TAG = "SearchLocationResult";
-    private Button logOut;
+    private Button back;
     private DatabaseReference reference;
     private DatabaseReference reference2;
     RecyclerView recyclerView;
     ArrayList<Location> locationList;
+    ArrayList<Item> itemList;
     MyAdapter adapter;
+    ItemsAdapter itemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +49,11 @@ public class SearchLocationResultActivity extends Activity {
         final String itemName = extras.getString("item_name"); //itemName will always be valid -- check is done in previous activity
         final String singleLoc = extras.getString("single_loc");
 
-        logOut = findViewById(R.id.button_logout);
+        back = findViewById(R.id.button_back);
 
 
         if (singleLoc == null && category == null && itemName != null) {
-            Log.d(TAG, "SEARCHING BY ALL LOCATIONS AND ITEM");
+            //Log.d(TAG, "SEARCHING BY ALL LOCATIONS AND ITEM");
             DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("locations");
             //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
 
@@ -80,7 +83,10 @@ public class SearchLocationResultActivity extends Activity {
                             }
                         }
                     }
-                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList);
+                    if (locationList.isEmpty()) {
+                        Toast.makeText(SearchLocationResultActivity.this, "ITEM DOES NOT EXIST AT ANY LOCATION", Toast.LENGTH_LONG).show();
+                    }
+                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList, itemName, null);
                     recyclerView.setAdapter(adapter);
 
                 }
@@ -90,23 +96,12 @@ public class SearchLocationResultActivity extends Activity {
 
                 }
             });
-///            reference = FirebaseDatabase.getInstance().getReference();
-//
-//            InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-//            CSVFile csvFile = new CSVFile(inputStream);
-//            List locs = csvFile.read();
-//
-//            for (int i = 1; i < locs.size(); i++) {
-//                String[] row = (String[]) locs.get(i);
-//                Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
-//                        row[7], row[8], row[9], row[10]);
-//                reference.child("locations").child(Integer.toString(loc.getKey())).setValue(loc);
-//            }
+
 
         }
 
         if (singleLoc == null && category != null && itemName == null) {
-            Log.d(TAG, "SEARCHING BY ALL LOCATIONS AND CATEGORY");
+            //Log.d(TAG, "SEARCHING BY ALL LOCATIONS AND CATEGORY");
             DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("locations");
             //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
 
@@ -135,7 +130,7 @@ public class SearchLocationResultActivity extends Activity {
                             }
                         }
                     }
-                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList);
+                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList, null, category);
                     recyclerView.setAdapter(adapter);
 
                 }
@@ -148,7 +143,7 @@ public class SearchLocationResultActivity extends Activity {
         }
 
         if (singleLoc != null && category == null && itemName != null) {
-            Log.d(TAG, "SEARCHING BY SINGLE LOCATION AND ITEM");
+            //Log.d(TAG, "SEARCHING BY SINGLE LOCATION AND ITEM");
             DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("locations");
             //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
 
@@ -160,6 +155,7 @@ public class SearchLocationResultActivity extends Activity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     locationList = new ArrayList<Location>();
+                    itemList = new ArrayList<Item>();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Location l = dataSnapshot1.getValue(Location.class);
                         //Log.d(TAG, l.getItems().get())
@@ -180,13 +176,17 @@ public class SearchLocationResultActivity extends Activity {
                                 Log.d(TAG, item.getName() + " " + itemName);
                                 if (item.getName().equals(itemName) && !locationList.contains(l)) {
                                     Log.d(TAG, "FOUND");
+                                    itemList.add(item);
                                     locationList.add(l);
                                 }
                             }
                         }
                     }
-                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList);
-                    recyclerView.setAdapter(adapter);
+                    if (locationList.isEmpty()) {
+                        Toast.makeText(SearchLocationResultActivity.this, "ITEM DOES NOT EXIST AT THIS LOCATION", Toast.LENGTH_LONG).show();
+                    }
+                    itemsAdapter = new ItemsAdapter(SearchLocationResultActivity.this, itemList);
+                    recyclerView.setAdapter(itemsAdapter);
 
                 }
 
@@ -200,7 +200,7 @@ public class SearchLocationResultActivity extends Activity {
         }
 
         if (singleLoc != null && category != null && itemName == null) {
-            Log.d(TAG, "SEARCHING BY SINGLE LOCATION AND CATEGORY");
+            //Log.d(TAG, "SEARCHING BY SINGLE LOCATION AND CATEGORY");
             DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("locations");
             //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
 
@@ -211,7 +211,8 @@ public class SearchLocationResultActivity extends Activity {
             locRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    locationList = new ArrayList<Location>();
+                    //locationList = new ArrayList<Location>();
+                    itemList = new ArrayList<Item>();
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                         Location l = dataSnapshot1.getValue(Location.class);
                         //Log.d(TAG, l.getItems().get())
@@ -229,15 +230,17 @@ public class SearchLocationResultActivity extends Activity {
                             for (String key : itemMap.keySet()) {
 
                                 Item item = itemMap.get(key);
-                                if (item.getCategory().equals(category) && !locationList.contains(l)) {
-
-                                    locationList.add(l);
+                                if (item.getCategory().equals(category) && !itemList.contains(item)) {
+                                    itemList.add(item);
                                 }
                             }
                         }
                     }
-                    adapter = new MyAdapter(SearchLocationResultActivity.this, locationList);
-                    recyclerView.setAdapter(adapter);
+                    if (itemList.isEmpty()) {
+                        Toast.makeText(SearchLocationResultActivity.this, "NO ITEMS IN THIS CATEGORY AT THIS LOCATION", Toast.LENGTH_LONG).show();
+                    }
+                    itemsAdapter = new ItemsAdapter(SearchLocationResultActivity.this, itemList);
+                    recyclerView.setAdapter(itemsAdapter);
 
                 }
 
@@ -271,10 +274,10 @@ public class SearchLocationResultActivity extends Activity {
         userRef.addListenerForSingleValueEvent(valueEventListener);*/
 
 
-        logOut.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SearchLocationResultActivity.this, WelcomeScreenActivity.class);
+                Intent intent = new Intent(SearchLocationResultActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });

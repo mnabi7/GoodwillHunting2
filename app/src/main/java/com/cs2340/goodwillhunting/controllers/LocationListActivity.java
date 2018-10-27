@@ -53,7 +53,7 @@ public class LocationListActivity extends Activity {
                     Location l = dataSnapshot1.getValue(Location.class);
                     list.add(l);
                 }
-                adapter = new MyAdapter(LocationListActivity.this, list);
+                adapter = new MyAdapter(LocationListActivity.this, list, null, null);
                 recyclerView.setAdapter(adapter);
 
             }
