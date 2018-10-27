@@ -16,7 +16,7 @@ import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 import android.widget.EditText;
-
+import android.content.Intent;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -99,15 +99,51 @@ public class SearchActivity extends Activity {
 
                 if (loc_answer.getId() == R.id.radio_all_loc) {
                     if (item_answer.getId() == R.id.radio_item_name) {
-                        Toast.makeText(SearchActivity.this, "All location and item name", Toast.LENGTH_LONG).show();
+                        if (itemName.getText().toString().isEmpty()) {
+                            Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(SearchActivity.this, "All location and item name", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString("item_name", itemName.getText().toString());
+                            extras.putString("category", null);
+                            extras.putString("single_loc", null);
+                            intent.putExtras(extras);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast.makeText(SearchActivity.this, "All locations and category", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("category", chooseCategory.getSelectedItem().toString());
+                        extras.putString("item_name", null);
+                        extras.putString("single_loc", null);
+                        intent.putExtras(extras);
+                        startActivity(intent);
                     }
                 } else {
                     if (item_answer.getId() == R.id.radio_item_name) {
-                        Toast.makeText(SearchActivity.this, "Single location and item name", Toast.LENGTH_LONG).show();
+                        if (itemName.getText().toString().isEmpty()) {
+                            Toast.makeText(SearchActivity.this, "No item entered", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(SearchActivity.this, "Single location and item name", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                            Bundle extras = new Bundle();
+                            extras.putString("category", null);
+                            extras.putString("item_name", itemName.getText().toString());
+                            extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
+                            intent.putExtras(extras);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast.makeText(SearchActivity.this, "Single locations and category", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SearchActivity.this, SearchLocationResultActivity.class);
+                        Bundle extras = new Bundle();
+                        extras.putString("category", chooseCategory.getSelectedItem().toString());
+                        extras.putString("item_name", null);
+                        extras.putString("single_loc", chooseLoc.getSelectedItem().toString());
+                        intent.putExtras(extras);
+                        startActivity(intent);
                     }
                 }
             }

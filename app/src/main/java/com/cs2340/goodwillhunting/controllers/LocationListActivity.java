@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 // Shows all the locations
 public class LocationListActivity extends Activity {
 
-    private static final String TAG = "MainMenu";
+    private static final String TAG = "LocationList";
     private Button logOut;
     private Button search;
     private DatabaseReference reference;
@@ -69,16 +69,30 @@ public class LocationListActivity extends Activity {
 
         reference = FirebaseDatabase.getInstance().getReference();
 
-        InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        CSVFile csvFile = new CSVFile(inputStream);
-        List locs = csvFile.read();
+        //InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
+        //CSVFile csvFile = new CSVFile(inputStream);
+        //List locs = csvFile.read();
 
-        for (int i = 1; i < locs.size(); i++) {
+        //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
+
+        /*for (int i = 1; i < locs.size(); i++) {
             String[] row = (String[]) locs.get(i);
             Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
                     row[7], row[8], row[9], row[10]);
             reference.child("locations").child(Integer.toString(loc.getKey())).setValue(loc);
-        }
+            itemRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }*/
 
 
     }

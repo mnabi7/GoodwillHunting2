@@ -1,5 +1,7 @@
 package com.cs2340.goodwillhunting.model;
 
+import java.util.HashMap;
+
 public class Location {
 
     private int key;
@@ -13,6 +15,7 @@ public class Location {
     private String type;
     private String phone;
     private String website;
+    private HashMap<String, Item> items = new HashMap<>();
 
     public Location(){
 
@@ -67,6 +70,10 @@ public class Location {
 
     public String getWebsite() { return website; }
     public void setWebsite(String website) { this.website = website; }
+
+    public HashMap<String, Item> getItems() { return items; }
+    public void setItems(HashMap<String, Item> items) { this.items = items; }
+
 
     public String toString() {
         return name + "\n" + address + "\n" + city + ", " + state + " " + zip + "\n" + phone + "\n" + website;

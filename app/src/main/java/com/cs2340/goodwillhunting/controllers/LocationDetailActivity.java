@@ -124,6 +124,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 intent.putExtra("location_key",extraKey);
+                intent.putExtra("location_name", extraName);
                 startActivity(intent);
             }
         });
@@ -158,7 +159,7 @@ public class LocationDetailActivity extends AppCompatActivity {
                     DatabaseReference reference2 = FirebaseDatabase.getInstance().getReference().child("items");
 
                     //should be holding the location items # container of items
-                    reference2 = reference2.child(extraKey);
+                    reference2 = reference2.child("Location " + extraKey);
                     recyclerView.setLayoutManager(new LinearLayoutManager(LocationDetailActivity.this));
                     reference2.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -169,8 +170,28 @@ public class LocationDetailActivity extends AppCompatActivity {
                                 Item it = dataSnapshot1.getValue(Item.class);
                                 itemList.add(it);
                             }
+
                             adapter = new ItemsAdapter(LocationDetailActivity.this, itemList);
                             recyclerView.setAdapter(adapter);
+
+                            /*final DatabaseReference locRef = FirebaseDatabase.getInstance().getReference().child("locations");
+                            locRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                        Location loc = snapshot.getValue(Location.class);
+                                        if (loc.getKey() == Integer.parseInt(extraKey)) {
+                                            loc.setItems(itemList);
+                                            locRef.child(Integer.toString(loc.getKey())).setValue(loc);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });*/
 
                         }
 

@@ -43,6 +43,9 @@
         <activity android:name=".controllers.SearchActivity">
         </activity>
 
+        <activity android:name=".controllers.SearchLocationResultActivity">
+        </activity>
+
 
         <meta-data
             android:name="preloaded_fonts"

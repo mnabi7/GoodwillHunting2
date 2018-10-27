@@ -3,6 +3,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_itemkey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="305dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="325dp"
+        android:text="Item Key:" />
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="273dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="275dp"
+        android:text="Category" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +69,7 @@
         android:text="Item Description: " />
 
     <TextView
-        android:id="@+id/item_idnumber"
+        android:id="@+id/item_value"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
@@ -43,7 +77,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="168dp"
         android:gravity="bottom"
-        android:text="Item ID: " />
+        android:text="Item Value: $ " />
 
     <TextView
         android:id="@+id/item_quantity"
@@ -55,17 +89,6 @@
         android:layout_marginTop="209dp"
         android:gravity="bottom"
         android:text="Quantity: " />
-
-    <TextView
-        android:id="@+id/item_key"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="250dp"
-        android:gravity="bottom"
-        android:text="Item Key: " />
 
     <EditText
         android:id="@+id/et_itemname"
@@ -79,11 +102,11 @@
         android:textAlignment="center" />
 
     <EditText
-        android:id="@+id/et_itemid"
+        android:id="@+id/et_itemvalue"
         android:layout_width="100dp"
         android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/item_idnumber"
-        android:layout_toRightOf="@+id/item_idnumber"
+        android:layout_alignBaseline="@+id/item_value"
+        android:layout_toRightOf="@+id/item_value"
         android:gravity="bottom"
         android:textAlignment="center" />
 
@@ -93,15 +116,6 @@
         android:layout_height="40dp"
         android:layout_alignBaseline="@+id/item_quantity"
         android:layout_toRightOf="@+id/item_quantity"
-        android:gravity="bottom"
-        android:textAlignment="center" />
-
-    <EditText
-        android:id="@+id/et_itemkey"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/item_key"
-        android:layout_toRightOf="@+id/item_key"
         android:gravity="bottom"
         android:textAlignment="center" />
 
