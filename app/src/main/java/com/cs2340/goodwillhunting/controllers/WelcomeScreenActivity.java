@@ -6,10 +6,14 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.util.Log;
 
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.cs2340.goodwillhunting.R;
+import com.google.firebase.FirebaseApp;
 
 public class WelcomeScreenActivity extends Activity {
+    final static String TAG = "WelcomeScreenActivity";
     private Button mSignUpButton;
     private Button mLoginButton;
     @Override
@@ -19,7 +23,8 @@ public class WelcomeScreenActivity extends Activity {
 
         mLoginButton = (Button) findViewById(R.id.button_login);
         mSignUpButton = (Button) findViewById(R.id.button_signup);
-
+        FirebaseApp.initializeApp(this);
+        showGooglePlayServicesStatus();
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,6 +40,13 @@ public class WelcomeScreenActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void showGooglePlayServicesStatus() {
+        GoogleApiAvailability apiAvail = GoogleApiAvailability.getInstance();
+        int errorCode = apiAvail.isGooglePlayServicesAvailable(this);
+        String msg = "Play Services: " + apiAvail.getErrorString(errorCode);
+        Log.d(TAG, msg);
     }
 
 }

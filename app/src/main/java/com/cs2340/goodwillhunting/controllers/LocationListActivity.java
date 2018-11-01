@@ -29,6 +29,7 @@ public class LocationListActivity extends Activity {
     private static final String TAG = "LocationList";
     private Button logOut;
     private Button search;
+    private Button map;
     private DatabaseReference reference;
     private DatabaseReference reference2;
     RecyclerView recyclerView;
@@ -66,16 +67,17 @@ public class LocationListActivity extends Activity {
         });
         logOut = findViewById(R.id.button_logout);
         search = findViewById(R.id.button_search);
+        map = findViewById(R.id.button_map);
 
         reference = FirebaseDatabase.getInstance().getReference();
 
-        //InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
-        //CSVFile csvFile = new CSVFile(inputStream);
-        //List locs = csvFile.read();
+        /*InputStream inputStream = getResources().openRawResource(R.raw.locationdata);
+        CSVFile csvFile = new CSVFile(inputStream);
+        List locs = csvFile.read();
 
-        //DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
+        DatabaseReference itemRef = FirebaseDatabase.getInstance().getReference().child("items");
 
-        /*for (int i = 1; i < locs.size(); i++) {
+        for (int i = 1; i < locs.size(); i++) {
             String[] row = (String[]) locs.get(i);
             Location loc = new Location(Integer.parseInt(row[0]), row[1], row[2], row[3], row[4], row[5], row[6],
                     row[7], row[8], row[9], row[10]);
@@ -131,6 +133,13 @@ public class LocationListActivity extends Activity {
             }
         });
 
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LocationListActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
