@@ -15,4 +15,5 @@
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="title_activity_log_out">LogOutActivity</string>
     <string name="checkbox_show">Show Password</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
