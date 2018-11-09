@@ -11,6 +11,9 @@ import com.cs2340.goodwillhunting.controllers.LocationListActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Class to represent the model of the application
+ */
 public class Model {
 
     private static final Model _instance = new Model();
@@ -22,6 +25,9 @@ public class Model {
     private InputStream inputStream;
 
 
+    /**
+     * No-args constructor to invoke the model (private - only one object can be created)
+     */
     private Model() {
         _locations = new ArrayList<>();
         //loadData();
@@ -29,6 +35,9 @@ public class Model {
 
     //public void initInputStream(InputStream inputStream) { this.inputStream = inputStream; }
 
+    /**
+     * method to load the Data into the model from the database
+     */
     private void loadData() {
         reference = FirebaseDatabase.getInstance().getReference();
 
@@ -45,8 +54,17 @@ public class Model {
 
     }
 
+    /**
+     * getter for locations
+     * @return list of locations
+     */
     public List<Location> getLocations() { return _locations; }
 
+    /**
+     * method to add a location to the list
+     * @param loc location to be added
+     * @return boolean true if location added, false if location is a duplicate
+     */
     public boolean addLocation(Location loc) {
         for (Location l : _locations) {
             if(l.equals(loc)) { return false; }
@@ -55,11 +73,28 @@ public class Model {
         return true;
     }
 
+    /**
+     * method to clear the locations list
+     */
     public void clear(){ _locations.clear(); }
 
+    /**
+     * getter for current location
+     * @return current location
+     */
     public Location getCurrLocation() { return currLocation; }
+
+    /**
+     * setter for current location
+     * @param loc new location to set as current location
+     */
     public void setCurrLocation(Location loc) { currLocation = loc; }
 
+    /**
+     * gets location based on a key
+     * @param key key to match to location
+     * @return location that matches the key, null if no matches
+     */
     public Location getLocationByKey(int key) {
         for (Location l : _locations) {
             if (l.getKey() == key) {
@@ -69,6 +104,10 @@ public class Model {
         return null;
     }
 
+    /**
+     * removes a particular location from location list
+     * @param loc location to be removed
+     */
     public void removeLocation(Location loc) {
         boolean found = false;
         int i = 0;
@@ -83,6 +122,11 @@ public class Model {
         }
     }
 
+    /**
+     * edits the name of a location
+     * @param loc location to be edited
+     * @param newName new name of location
+     */
     public void editLocationName(Location loc, String newName) {
         for (Location l : _locations) {
             if (l.equals(loc)) {

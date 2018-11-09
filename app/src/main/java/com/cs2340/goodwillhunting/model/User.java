@@ -41,9 +41,9 @@ public class User implements Parcelable {
     }
 
     /**
-     * Make a new user
-     * @param email      the user's name
-     * @param password   the user's major
+     * Constructor to make new user
+     * @param email user name
+     * @param password user password
      */
     public User(String email, String password, UserType type) {
 
@@ -62,15 +62,36 @@ public class User implements Parcelable {
     //no setter for this.  id is a read only field
     //public int getId() { return _id; }
 
-    /** Returns user email*/
+    /**
+     * getter for email
+     * @return user email
+     */
     public String getEmail() { return _email; }
+
+    /**
+     * setter for email
+     * @param email new email to set as email
+     */
     public void setName(String email) { _email = email; }
 
-    /** Returns user password*/
+    /**
+     * getter for password
+     * @return password
+     */
     public String getPassword() {return _password; }
+
+    /**
+     * setter for password
+     * @param password new password to set as password
+     */
     public void setPassword(String password) { _password = password; }
 
     // no setter for this. type is a read only field
+
+    /**
+     * getter for type
+     * @return user type
+     */
     public UserType getType() { return _user_type; }
 
 
@@ -85,12 +106,21 @@ public class User implements Parcelable {
         _password = in.readString();
         //_id = in.readInt();
     }
+
+    /**
+     * method to describe the contents
+     * @return 0
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
-
+    /**
+     * methos to write to parcel
+     * @param dest parcel destination
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_email);
@@ -101,12 +131,23 @@ public class User implements Parcelable {
      * Should not have to edit this method if the constructor and write method are
      * working correctly.
      */
+
     public static final Parcelable.Creator<User> CREATOR
             = new Parcelable.Creator<User>() {
+        /**
+         * method to create a user from parcel
+         * @param in
+         * @return new user
+         */
         public User createFromParcel(Parcel in) {
             return new User(in);
         }
 
+        /**
+         * methos to return a user array
+         * @param size
+         * @return user array
+         */
         public User[] newArray(int size) {
             return new User[size];
         }
