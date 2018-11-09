@@ -78,4 +78,24 @@ public class Location {
     public String toString() {
         return name + "\n" + address + "\n" + city + ", " + state + " " + zip + "\n" + phone + "\n" + website;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) {
+            return false;
+        }
+        if(o == this){
+            return true;
+        }
+
+        if(!(o instanceof Location)) {
+            return false;
+        }
+        Location loc = (Location) o;
+        // didnt want to individually check all attributes
+        // if the string reprs are the same, all is the same
+        return loc.toString().equals(this.toString())
+                && this.key == loc.getKey();
+
+    }
 }

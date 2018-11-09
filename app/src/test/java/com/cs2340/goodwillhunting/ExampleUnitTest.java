@@ -2,6 +2,7 @@ package com.cs2340.goodwillhunting;
 
 import com.cs2340.goodwillhunting.model.Location;
 import com.cs2340.goodwillhunting.model.Model;
+import com.cs2340.goodwillhunting.model.User;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class ExampleUnitTest {
                 "Atl", "GA", "30332", "Dropoff", "1111111111", "1.com");
 
         location2 = new Location(2, "Donation Center", "1", "1", "Georgia Tech",
-                "Atl", "GA", "30332", "Dropoff", "1111111111", "1.com");
+                "Atl", "FL", "30332", "Dropoff", "1111111111", "1.com");
 
         model.addLocation(location1);
         model.addLocation(location2);
@@ -81,6 +82,24 @@ public class ExampleUnitTest {
         model.addLocation(location1);
         model.editLocationName(location1, newName);
         assertEquals(newName, model.getLocations().get(0).getName());
+
+    }
+
+    @Test
+    public void testLocationEquals() {
+        location1 = new Location(1, "Donation Center", "1", "1", "Georgia Tech",
+                "Atl", "GA", "30332", "Dropoff", "1111111111", "1.com");
+        location2 = new Location(1, "Donation Center", "1", "1", "Georgia Tech",
+                "Atl", "GA", "30332", "Dropoff", "1111111111", "1.com");
+        location3 = new Location(1, "Donation Center", "1", "1", "Georgia Tech",
+                "Atl", "FL", "30332", "Dropoff", "1111111111", "1.com");
+        User user = new User();
+
+        assertFalse(location1.equals(null));
+        assertTrue(location1.equals(location1));
+        assertFalse(location1.equals(user));
+        assertTrue(location1.equals(location2));
+        assertFalse(location1.equals(location3));
 
     }
 }
