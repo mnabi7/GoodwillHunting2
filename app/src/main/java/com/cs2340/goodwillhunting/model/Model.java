@@ -69,4 +69,26 @@ public class Model {
         return null;
     }
 
+    public void removeLocation(Location loc) {
+        boolean found = false;
+        int i = 0;
+        while (!found && i < _locations.size()) {
+            if (loc.equals(_locations.get(i))) {
+                _locations.remove(i);
+                found = true;
+            }
+            else {
+                i++;
+            }
+        }
+    }
+
+    public void editLocationName(Location loc, String newName) {
+        for (Location l : _locations) {
+            if (l.equals(loc)) {
+                loc.setName(newName);
+            }
+        }
+    }
+
 }
