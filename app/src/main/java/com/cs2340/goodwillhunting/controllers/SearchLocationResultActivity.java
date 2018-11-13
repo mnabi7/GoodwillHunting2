@@ -26,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 
+/**
+ * class that lets the user search by location
+ */
 public class SearchLocationResultActivity extends Activity {
 
     private static final String TAG = "SearchLocationResult";
@@ -38,6 +41,9 @@ public class SearchLocationResultActivity extends Activity {
     MyAdapter adapter;
     ItemsAdapter itemsAdapter;
 
+    /**
+     * sets up the search function
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -257,6 +263,9 @@ public class SearchLocationResultActivity extends Activity {
 
     }
 
+    /**
+     * method that executes the search
+     */
     @Override
     protected void onStart() {
         super.onStart();

@@ -89,6 +89,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Class representing the Location Detail Activity
+ */
 public class LocationDetailActivity extends AppCompatActivity {
     private static final String TAG = "LocationDetailActivity";
     FloatingActionButton info;
@@ -100,6 +103,11 @@ public class LocationDetailActivity extends AppCompatActivity {
     String extraName="";
     String extraKey="";
 
+    /**
+     * method initializing the user interface
+     *
+     * @param savedInstanceState the saved instance state
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +139,9 @@ public class LocationDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * method that gets the incoming intent
+     */
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
         if (getIntent().hasExtra("location_name")) {
@@ -244,6 +255,12 @@ public class LocationDetailActivity extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * method that sets the store's name
+     *
+     * @param storeName the store's name
+     */
     private void setStoreName(String storeName) {
         TextView name = findViewById(R.id.store_Name);
         name.setText(storeName);

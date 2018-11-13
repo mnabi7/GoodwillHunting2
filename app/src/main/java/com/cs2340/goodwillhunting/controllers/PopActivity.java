@@ -21,10 +21,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * class that controls the layout
+ */
 public class PopActivity extends Activity {
     Button close;
     private static final String TAG = "PopActivity";
 
+    /**
+     * sets up buttons and windows
+     *
+     * @param savedInstanceState saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +64,9 @@ public class PopActivity extends Activity {
 
     }
 
+    /**
+     * gets the incoming intent
+     */
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
         if(getIntent().hasExtra("location_name")) {
@@ -96,6 +107,22 @@ public class PopActivity extends Activity {
 
         }
     }
+
+    /**
+     * sets the store name
+     *
+     * @param storeName store's name
+     * @param address store's address
+     * @param city store's city
+     * @param key store key
+     * @param latitude store's latitude
+     * @param longitude store's longitude
+     * @param phone store's phone number
+     * @param state the state the store is in
+     * @param type the type of store
+     * @param website the store's website
+     * @param zip the store's zip code
+     */
     private void setStoreName(String storeName, String address, String city, String key, String latitude,String longitude,
                               String phone, String state, String type, String  website, String zip) {
         Log.d(TAG, "setName: setting the store name to widgets.");

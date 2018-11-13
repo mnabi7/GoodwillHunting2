@@ -20,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Class that controls the Item Detail Activity
+ */
 public class ItemDetailActivity extends Activity {
 
     Button close;
@@ -56,6 +59,9 @@ public class ItemDetailActivity extends Activity {
 
     }
 
+    /**
+     * method to get incoming intent
+     */
     private void getIncomingIntent() {
         Log.d(TAG, "getIncomingIntent: checking for incoming intents.");
         if(getIntent().hasExtra("item_name")&&getIntent().hasExtra("item_loc")) {
@@ -90,6 +96,12 @@ public class ItemDetailActivity extends Activity {
 
         }
     }
+
+    /**
+     * method that sets the description
+     * @param itemDescription the item's description
+     * @param itemName the item's name
+     */
     private void setDescription(String itemDescription, String itemName) {
         Log.d(TAG, "setName: setting the store name to widgets.");
         TextView desc = findViewById(R.id.item_description);

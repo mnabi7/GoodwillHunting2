@@ -19,7 +19,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.cs2340.goodwillhunting.R;
 
-
+/**
+ * class that controls the logging functions of the app
+ */
 public class LogInActivity extends Activity {
 
     private static final String TAG = "LogIn";
@@ -34,7 +36,9 @@ public class LogInActivity extends Activity {
     // Firebase
     private FirebaseAuth mAuth;
 
-
+    /**
+     * method to access the database
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,12 @@ public class LogInActivity extends Activity {
                 });
     }
 
+    /**
+     * checks to see if anything is empty
+     *
+     * @param email the user's email
+     * @param password the user's email
+     */
     private boolean validateEmpty(String email, String password) {
         if (email.isEmpty()) {
             Toast.makeText(LogInActivity.this, "Please enter an email", Toast.LENGTH_LONG).show();

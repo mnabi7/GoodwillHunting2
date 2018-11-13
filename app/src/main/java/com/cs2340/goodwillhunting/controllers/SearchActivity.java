@@ -26,8 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-// search by single location or all location
-// search by category or item name
+/**
+ * class to search for locations or items
+ */
 public class SearchActivity extends Activity {
 
     private static final String TAG = "SearchActivity";
@@ -42,6 +43,9 @@ public class SearchActivity extends Activity {
     private DatabaseReference reference;
     ArrayList<String> locNames;
 
+    /**
+     * method that sets up information and database
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +88,9 @@ public class SearchActivity extends Activity {
 
     }
 
+    /**
+     * method that executes search function
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -163,7 +170,9 @@ public class SearchActivity extends Activity {
 
     }
 
-    // needed method for radio buttons, but doesn't do anything
+    /**
+     * method for radio buttons
+     */
     public void onRadioButtonClicked(View view) {}
 
 }

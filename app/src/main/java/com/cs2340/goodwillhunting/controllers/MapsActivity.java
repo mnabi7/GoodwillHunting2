@@ -21,11 +21,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * class that controls Google Maps access
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private DatabaseReference reference;
 
+    /**
+     * method to set up maps
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
+     *
+     * @param googleMap google Map
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -53,6 +61,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         displayLocations();
     }
 
+    /**
+     * method that displays the locations
+     */
     private void displayLocations() {
         reference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -12,10 +12,17 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.cs2340.goodwillhunting.R;
 import com.google.firebase.FirebaseApp;
 
+/**
+ * class that controls the welcome screen
+ */
 public class WelcomeScreenActivity extends Activity {
     final static String TAG = "WelcomeScreenActivity";
     private Button mSignUpButton;
     private Button mLoginButton;
+
+    /**
+     * sets up the welcome screen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,9 @@ public class WelcomeScreenActivity extends Activity {
         });
     }
 
+    /**
+     * method that shows the google play services status
+     */
     private void showGooglePlayServicesStatus() {
         GoogleApiAvailability apiAvail = GoogleApiAvailability.getInstance();
         int errorCode = apiAvail.isGooglePlayServicesAvailable(this);

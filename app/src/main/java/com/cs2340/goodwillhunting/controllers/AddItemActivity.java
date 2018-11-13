@@ -25,6 +25,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Class that organizes the User Interface
+ */
 public class AddItemActivity extends AppCompatActivity {
     private static final String TAG = "AddItemActivity";
 
@@ -36,6 +39,11 @@ public class AddItemActivity extends AppCompatActivity {
 
     DatabaseReference reference;
 
+    /**
+     * initializes the screen
+     *
+     * @param savedInstanceState a saved instance state
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

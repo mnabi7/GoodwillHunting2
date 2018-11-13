@@ -31,9 +31,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-
-
-
+/**
+ * class in which users sign up
+ */
 public class SignUpActivity extends Activity {
 
     private static final String TAG = "SignUp";
@@ -57,7 +57,9 @@ public class SignUpActivity extends Activity {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
 
-
+    /**
+     * sets up the signing in functions
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +94,9 @@ public class SignUpActivity extends Activity {
 
     }
 
+    /**
+     * method that executes the sign up
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -131,6 +136,9 @@ public class SignUpActivity extends Activity {
         });
     }
 
+    /**
+     * method that creates the account
+     */
     private void createAccount() {
         mAuth.createUserWithEmailAndPassword(emailField.getText().toString(), passwordField.getText().toString())
                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
@@ -166,6 +174,13 @@ public class SignUpActivity extends Activity {
                 });
     }
 
+    /**
+     * method that creates account reference
+     *
+     * @param email the user's email
+     * @param password the user's password
+     * @param userType the user's account type
+     */
     private User createAccountReference(String email, String password, String userType) {
 
         User user;

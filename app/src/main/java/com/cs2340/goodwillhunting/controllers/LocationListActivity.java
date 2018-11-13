@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-// Shows all the locations
+/**
+ * Class that shows all the locations
+ */
 public class LocationListActivity extends Activity {
 
     private static final String TAG = "LocationList";
@@ -36,6 +38,11 @@ public class LocationListActivity extends Activity {
     ArrayList<Location> list;
     MyAdapter adapter;
 
+    /**
+     * method that accesses and updates the database
+     *
+     * @param savedInstanceState the saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +106,11 @@ public class LocationListActivity extends Activity {
 
     }
 
+    /**
+     * method that executes as soon as the app starts
+     * initializes parts of the user interface including
+     * buttons and search bars
+     */
     @Override
     protected void onStart() {
         super.onStart();
